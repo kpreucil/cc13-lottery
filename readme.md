@@ -8,6 +8,7 @@ Build a webpage which does the following:
 * The user enters 4 distinct numbers between 1 and 10, inclusive. (see hint)
 * The user presses a button which costs them $2, and the computer generates four distinct random numbers between 1 and 10 inclusive which are shown to the user.
 * The user wins 2^n^2 (two to the n squared) dollars, where n is the number of numbers they guessed correctly. No winnings given if there are no matches. (0 = $0, 1 = $2, 2 = $16, 3 = $64, 4 = $4096)
+* CHANGE: The user wins money based on n, where n is the number of numbers they guessed correctly. No winnings given if there are no matches. For example, you could do (0 = $0, 1 = $2, 2 = $4, 3 = $16, 4 = $64) or something similar.
 
 ## Details
 

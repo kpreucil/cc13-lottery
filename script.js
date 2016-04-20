@@ -9,7 +9,7 @@ var list = [];
 var inputs = [];
 var money = 10;
 
-var correct = [];
+//var correct = [];
 var cash = document.getElementById("bank");
 
 
@@ -31,6 +31,12 @@ function handleGuess() {
         block = document.getElementById("output");
     if (userNum.length > 4 || userNum.length < 4) {
         alert("Oops, you need to read the instructions. Your mistake has cost you $2");
+        return;
+    }
+    //need to put in the exit for if I enter a number that is not 1-10
+    if(userNum < 1 || userNum > 10){
+        alert("Oops, you need to read the instructions. Your mistake has cost you $2");
+        return;
     }
     console.log(userNum);
     block.innerHTML = "<h5> Your Lucky Numbers: " + userNum + "</h5>";
@@ -58,7 +64,7 @@ function shuffle() {
         display = document.getElementById("display");
 
     for (var i = 0; i < 4; i++) {
-        list[i] = Math.floor(Math.random() * 11);
+        list[i] = Math.floor(Math.random() * 10 + 1);
         sum = list[i];
         for (var j = 0; j < i; j++) {
             sum = list[i];
@@ -71,40 +77,12 @@ function shuffle() {
     //    document.write(list);
 }
 
-//Money
-function buttonCost() {
-    money -= 2;
-    return money;
-}
-
-function moolah() {
-
-    if (correct.length == 0) {
-        money = money;
-    }
-    else if (correct.length == 1) {
-        money = money + 2;
-    }
-     else if (correct.length == 2) {
-        money += 4;
-    }
-     else if (correct.length == 3) {
-        money += 16;
-    }
-     else if (correct.length == 4) {
-        money += 64;
-    }
-    
-//    console.log(money);
-    return money
-}
-
-
 //verify
 
 function verify() {
     var randomize = shuffle(),
-        check = handleGuess();
+        check = handleGuess(),
+        correct = [];
 //    buttonCost();
 //    moolah();
     
@@ -126,12 +104,45 @@ function verify() {
     //        console.log("lose");
     //    }
 }
+
+//Money
+function buttonCost() {
+    money -= 2;
+    return money;
+}
+
+function moolah() {
+    var correct = verify();
+    console.log(correct);
+
+    if (correct == 0) {
+        money = money;
+    }
+    else if (correct== 1) {
+        money = money + 2;
+    }
+     else if (correct == 2) {
+        money += 4;
+    }
+     else if (correct == 3) {
+        money += 16;
+    }
+     else if (correct == 4) {
+        money += 64;
+    }
+    
+//    console.log(money);
+    return money
+}
+
+
+
 function submit(){
     if (money == 0){
         alert("You have no money in the bank. Come back when your're rolling in dough.");
+        return;
     };
     
-    verify();
     buttonCost();
     moolah();
     bank.innerHTML = "<h4>" + "You have $" + money + " in the bank" + "</h4>";
